@@ -12,6 +12,8 @@ os.chdir(path)
 txt = []
 wav = []
 
+cnt = 0
+
 for t in sorted(os.listdir("txt")):
     for file in sorted(os.listdir(os.path.join(path, "txt", t))):
         txt.append(os.path.splitext(file)[0])
@@ -22,6 +24,7 @@ for w in sorted(os.listdir("wav")):
             wav.append(os.path.splitext(file)[0])
         else:
             os.remove(os.path.join(path, "wav", w, file))
+            cnt += 1
             
 for w in wav:
     if w not in txt:
@@ -29,6 +32,7 @@ for w in wav:
             for file in f:
                 if file == w + ".wav":
                     os.remove(os.path.join(r, file))
+                    cnt += 1
         print(w + ".wav nema pripadacuje .txt datoteke pa je izbrisana.")
 
 for t in txt:
@@ -37,6 +41,7 @@ for t in txt:
             for file in f:
                 if file == t + ".txt":
                     os.remove(os.path.join(r, file))
+                    cnt += 1
         print(t + ".txt nema pripadajuce .wav datoteke pa je izbrisana.")     
         
-print("Podaci su spremni!")
+print(f"Podaci su spremni! Ukupno je izbrisano {cnt} datoteka.")
