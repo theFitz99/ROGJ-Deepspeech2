@@ -12,7 +12,9 @@ os.chdir(path)
 txt = []
 wav = []
 
-cnt = 0
+cnt_txt = 0
+cnt_wav = 0
+cnt_log = 0
 
 for t in sorted(os.listdir("txt")):
     for file in sorted(os.listdir(os.path.join(path, "txt", t))):
@@ -24,7 +26,7 @@ for w in sorted(os.listdir("wav")):
             wav.append(os.path.splitext(file)[0])
         else:
             os.remove(os.path.join(path, "wav", w, file))
-            cnt += 1
+            cnt_log += 1
             
 for w in wav:
     if w not in txt:
@@ -32,7 +34,7 @@ for w in wav:
             for file in f:
                 if file == w + ".wav":
                     os.remove(os.path.join(r, file))
-                    cnt += 1
+                    cnt_wav += 1
         print(w + ".wav nema pripadacuje .txt datoteke pa je izbrisana.")
 
 for t in txt:
@@ -41,7 +43,7 @@ for t in txt:
             for file in f:
                 if file == t + ".txt":
                     os.remove(os.path.join(r, file))
-                    cnt += 1
+                    cnt_txt += 1
         print(t + ".txt nema pripadajuce .wav datoteke pa je izbrisana.")     
         
-print(f"Podaci su spremni! Ukupno je izbrisano {cnt} datoteka.")
+print(f"Podaci su spremni!\nUkupno je izbrisano {cnt_wav} \033[3m.wav\x1B[0m datoteka, {cnt_txt} \033[3m.txt\x1B[0m datoteka i {cnt_log} \033[3mlog\x1B[0m datoteka.")
