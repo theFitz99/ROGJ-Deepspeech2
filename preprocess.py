@@ -30,7 +30,7 @@ for w in sorted(os.listdir("wav")):
             
 for w in wav:
     if w not in txt:
-        for r, d, f in os.walk(os.path.join(path, "wav")):
+        for r, d, f in os.walk("wav"):
             for file in f:
                 if file == w + ".wav":
                     os.remove(os.path.join(r, file))
@@ -39,7 +39,7 @@ for w in wav:
 
 for t in txt:
     if t not in wav:
-        for r, d, f in os.walk(os.path.join(path, "txt")):
+        for r, d, f in os.walk("txt"):
             for file in f:
                 if file == t + ".txt":
                     os.remove(os.path.join(r, file))
